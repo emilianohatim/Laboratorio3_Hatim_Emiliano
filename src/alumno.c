@@ -89,14 +89,14 @@ static void SerializarCampoNumerico(uint32_t numero, char * cadena) {
         *destino = '\0';
         return;
     }
-    char longitud[11]; // porque uint32_t llega hasta 10 digitos + fin de linea
+    char longitud[11];
     int i = 0;
-    while (numero > 0) {                     // extraigo digitos de atras hacia adelante
-        longitud[i++] = (numero % 10) + '0'; // convierto digito en caracter ASCII
+    while (numero > 0) {
+        longitud[i++] = (numero % 10) + '0';
         numero /= 10;
     }
     int j = 0;
-    while (i > 0) { // invierto cadena para que quede al derecho
+    while (i > 0) {
         *destino++ = longitud[--i];
     }
     *destino = '\0';
@@ -111,15 +111,15 @@ static void SerializarCampoNumerico(uint32_t numero, char * cadena) {
  */
 
 static void SerializarCampoDeTexto(char * origen, char * palabra) {
-    char * destino = origen + strlen(origen);      // posicionamiento al final de la cadena de caracteres
-    while (*palabra != '\0') {                     // recorro caracter por caracter
-        if (*palabra == '"' || *palabra == '\\') { // detecto caracteres como " o \.
+    char * destino = origen + strlen(origen);
+    while (*palabra != '\0') {
+        if (*palabra == '"' || *palabra == '\\') {
             *destino = '\\';
             destino++;
         }
         *destino = *palabra;
         destino++;
-        palabra++; // copio el caracter original
+        palabra++;
     }
     *destino = '\0';
 }
